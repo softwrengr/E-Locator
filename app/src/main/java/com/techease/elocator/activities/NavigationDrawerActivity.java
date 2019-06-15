@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.techease.elocator.R;
+import com.techease.elocator.fragments.StoreFragment;
+import com.techease.elocator.utilities.GeneralUtils;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,15 +84,16 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_store) {
+            GeneralUtils.connectFragmentWithDrawer(this,new StoreFragment());
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_view) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_rate) {
 
         }
 

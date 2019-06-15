@@ -24,15 +24,15 @@ public class GeneralUtils {
         return fragment;
     }
 
-//    public static Fragment connectFragmentWithHome(Context context, Fragment fragment){
-//        ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.home_container,fragment).addToBackStack("").commit();
-//        return fragment;
-//    }
-//
-//    public static Fragment connectFragmentHomeWithoutBaack(Context context, Fragment fragment){
-//        ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.home_container,fragment).commit();
-//        return fragment;
-//    }
+    public static Fragment connectFragmentWithDrawer(Context context, Fragment fragment){
+        ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container,fragment).addToBackStack("").commit();
+        return fragment;
+    }
+
+    public static Fragment connectFragmentDrawerWithoutBaack(Context context, Fragment fragment){
+        ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container,fragment).commit();
+        return fragment;
+    }
 
     public static SharedPreferences.Editor putBooleanValueInEditor(Context context, String key, boolean value) {
         sharedPreferences = getSharedPreferences(context);
