@@ -16,6 +16,12 @@
             android:id="@+id/nav_news"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_news" />
+
+        <item
+            android:id="@+id/nav_add"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Add Store" />
+
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_manage"

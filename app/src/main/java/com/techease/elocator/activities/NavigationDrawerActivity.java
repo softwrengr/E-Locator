@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.techease.elocator.R;
+import com.techease.elocator.fragments.AddStoreFragment;
 import com.techease.elocator.fragments.StoreFragment;
 import com.techease.elocator.utilities.GeneralUtils;
 
@@ -27,14 +28,17 @@ public class NavigationDrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                GeneralUtils.connectFragmentWithDrawer(NavigationDrawerActivity.this, new AddStoreFragment());
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -83,9 +87,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
         } else if (id == R.id.nav_store) {
-            GeneralUtils.connectFragmentWithDrawer(this,new StoreFragment());
+            GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
 
         } else if (id == R.id.nav_view) {
 
@@ -95,6 +99,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_rate) {
 
+        } else if (id == R.id.nav_add) {
+            GeneralUtils.connectFragmentWithDrawer(this, new AddStoreFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

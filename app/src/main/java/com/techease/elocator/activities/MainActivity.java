@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setTitle(getResources().getString(R.string.app_name));
 
         startActivity(new Intent(MainActivity.this,NavigationDrawerActivity.class));
     }
