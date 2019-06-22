@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1058781421654",
+    "firebase_url": "https://e-locator-51e9e.firebaseio.com",
+    "project_id": "e-locator-51e9e",
+    "storage_bucket": "e-locator-51e9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058781421654:android:01b2d9ca493b104b",
+        "android_client_info": {
+          "package_name": "com.techease.elocator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058781421654-nejjn0i41a87uohrknc2g8g8j89j27k1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techease.elocator",
+            "certificate_hash": "8a49158720a2ebae8039b7b3d30cebe77f89f196"
+          }
+        },
+        {
+          "client_id": "1058781421654-hfuh66t28gl69212qp51h5m4id9knv65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxgY4sQ2ZmEpG8TQTmK0O4iV7o3gQ2uqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058781421654-hfuh66t28gl69212qp51h5m4id9knv65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

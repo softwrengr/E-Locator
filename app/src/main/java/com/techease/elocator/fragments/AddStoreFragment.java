@@ -11,16 +11,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.techease.elocator.R;
 import com.techease.elocator.utilities.BaseNetworking;
+import com.techease.elocator.utilities.FireBaseDataInsertion;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,33 +48,51 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class AddStoreFragment extends Fragment {
-   View view;
-   @BindView(R.id.iv_store)
+    View view;
+    @BindView(R.id.iv_store)
     ImageView ivStore;
-   @BindView(R.id.iv_add_store)
-   ImageView ivAddStore;
+    @BindView(R.id.iv_add_store)
+    ImageView ivAddStore;
+    @BindView(R.id.btn_register)
+    Button btnAddStore;
 
     File sourceFile;
     final int CAMERA_CAPTURE = 10;
     final int RESULT_LOAD_IMAGE = 20;
+    private Uri imageURI;
     boolean valid = false;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    StorageReference mStorageRef,riversRef;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_store, container, false);
         getActivity().setTitle(getResources().getString(R.string.app_name));
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         BaseNetworking.grantPermission(getActivity());
         initViews();
         return view;
     }
 
-    private void initViews(){
+    private void initViews() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         ivAddStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              cameraBuilder();
+                cameraBuilder();
+            }
+        });
+
+        btnAddStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference = firebaseDatabase.getReference().child("AllStores");
+                FireBaseDataInsertion.StoreDataInsertion(getActivity(), databaseReference);
             }
         });
     }
@@ -108,6 +138,7 @@ public class AddStoreFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && null != data) {
             Uri selectedImageUri = data.getData();
+            imageURI = selectedImageUri;
             String imagepath = getPath(selectedImageUri);
             sourceFile = new File(imagepath);
             try {
@@ -115,9 +146,11 @@ public class AddStoreFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FireBaseDataInsertion.uploadImage(getActivity(), sourceFile, imageURI);
 
         } else if (resultCode == RESULT_OK && requestCode == CAMERA_CAPTURE && data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            imageURI = data.getData();
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
             thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
@@ -135,6 +168,7 @@ public class AddStoreFragment extends Fragment {
                 e.printStackTrace();
             }
             ivStore.setImageBitmap(thumbnail);
+            FireBaseDataInsertion.uploadImage(getActivity(), sourceFile, imageURI);
 
         }
     }
@@ -152,4 +186,5 @@ public class AddStoreFragment extends Fragment {
         return cursor.getString(column_index);
 
     }
+
 }
