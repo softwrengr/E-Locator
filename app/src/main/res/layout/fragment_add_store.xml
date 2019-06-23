@@ -3,105 +3,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".fragments.AddStoreFragment">
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register your store"
-        android:textColor="@color/blue"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-
-   <FrameLayout
-       android:id="@+id/image_store"
-       android:layout_below="@+id/title"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="20dp"
-       android:layout_marginRight="20dp">
-
-       <ImageView
-           android:id="@+id/iv_store"
-           android:layout_width="match_parent"
-           android:layout_height="120sp"
-           android:layout_below="@id/title"
-           android:layout_marginTop="10sp"
-           android:scaleType="fitXY"
-           android:src="@color/colorAccent" />
-
-
-       <ImageView
-           android:id="@+id/iv_add_store"
-           android:layout_width="60sp"
-           android:layout_height="50sp"
-           android:layout_marginRight="10dp"
-           android:layout_marginBottom="10dp"
-           android:scaleType="fitXY"
-           android:layout_gravity="bottom|right"
-           android:src="@drawable/add" />
-
-
-   </FrameLayout>
-    <EditText
-        android:id="@+id/et_title"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/image_store"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10sp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edittext_back"
-        android:hint="Name"
-        android:inputType="text"
-        android:paddingLeft="10sp" />
-
-    <EditText
-        android:id="@+id/et_contact"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/et_title"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10sp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edittext_back"
-        android:hint="Contact"
-        android:inputType="text"
-        android:paddingLeft="10sp" />
-
-    <EditText
-        android:id="@+id/et_Address"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/et_contact"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10sp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edittext_back"
-        android:hint="Address"
-        android:gravity="top"
-        android:inputType="text"
-        android:paddingLeft="10sp" />
+        android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_Address"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10sp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10sp"
-        android:background="@color/blue"
-        android:paddingLeft="10sp"
-        android:text="Register"
-        android:textColor="@color/white" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register your store"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:layout_marginTop="30sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:typeface="sans" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="100sp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/layout_back"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/image_store"
+                android:layout_below="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:id="@+id/iv_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="120sp"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="10sp"
+                    android:scaleType="fitXY"
+                    android:src="@color/blue" />
+
+
+                <ImageView
+                    android:id="@+id/iv_add_store"
+                    android:layout_width="60sp"
+                    android:layout_height="50sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="bottom|right"
+                    android:src="@drawable/add" />
+
+
+            </FrameLayout>
+            <EditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/image_store"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_back"
+                android:hint="Name"
+                android:inputType="text"
+                android:paddingLeft="10sp" />
+
+            <EditText
+                android:id="@+id/et_contact"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/et_title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_back"
+                android:hint="Contact"
+                android:inputType="text"
+                android:paddingLeft="10sp" />
+
+            <EditText
+                android:id="@+id/et_Address"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/et_contact"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_back"
+                android:hint="Address"
+                android:gravity="top"
+                android:inputType="text"
+                android:paddingLeft="10sp" />
+
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_Address"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10sp"
+                android:background="@color/blue"
+                android:paddingLeft="10sp"
+                android:text="Register"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
 
 
 </RelativeLayout>

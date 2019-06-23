@@ -15,17 +15,7 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="180sp"
-          android:background="@color/colorAccent">
-
-         <!--<ImageView-->
-             <!--android:id="@+id/iv_customer_back"-->
-             <!--android:layout_width="40sp"-->
-             <!--android:layout_height="40sp"-->
-             <!--android:src="@drawa"-->
-             <!--android:padding="10sp"-->
-             <!--android:layout_marginTop="30sp"-->
-             <!--android:layout_marginLeft="30sp"-->
-             <!--/>-->
+          android:background="@color/colorPrimary">
 
          <TextView
              android:id="@+id/title"
@@ -44,19 +34,19 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_marginLeft="10sp"
-          android:layout_marginRight="10sp"
+          android:layout_marginLeft="15sp"
+          android:layout_marginRight="15sp"
           android:layout_marginTop="100sp"
-          android:background="@color/white"
+          android:padding="10dp"
+          android:background="@drawable/layout_background"
           android:orientation="vertical">
 
          <android.support.v7.widget.RecyclerView
              android:id="@+id/rv_stores"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="2sp"
-             android:layout_marginRight="2sp"
-             android:layout_marginTop="2sp"
+             android:layout_marginLeft="5sp"
+             android:layout_marginRight="5sp"
              android:background="@color/white">
 
          </android.support.v7.widget.RecyclerView>
