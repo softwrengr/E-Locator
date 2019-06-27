@@ -23,15 +23,15 @@ public class FireBaseDataInsertion {
     public static boolean successfulBoolean = false;
     public static String strFirebaseImageUrl;
 
-    public static void StoreDataInsertion(Context context, DatabaseReference databaseReference) {
+    public static void StoreDataInsertion(Context context, DatabaseReference databaseReference, String strTitle, String strContact, String strAddress, String strLatitude, String strLongitude) {
 
 
         HashMap hashMap_record = new HashMap<String, String>();
-        hashMap_record.put("title", "kfc");
-        hashMap_record.put("address", "peshawar");
-        hashMap_record.put("latitude", "3470134");
-        hashMap_record.put("longitude", "4254245");
-        hashMap_record.put("contact", "8572487502");
+        hashMap_record.put("title", strTitle);
+        hashMap_record.put("address", strAddress);
+        hashMap_record.put("latitude", strLatitude);
+        hashMap_record.put("longitude", strLongitude);
+        hashMap_record.put("contact", strContact);
         hashMap_record.put("image", FireBaseDataInsertion.strFirebaseImageUrl);
 
         databaseReference.push().setValue(hashMap_record);
