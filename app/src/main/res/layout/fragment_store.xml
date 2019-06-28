@@ -32,17 +32,18 @@
              app:floatingSearch_leftActionMode="showHamburger"
              app:floatingSearch_close_search_on_keyboard_dismiss="true"/>/>
 
-         <!--<TextView-->
-             <!--android:id="@+id/title"-->
-             <!--android:layout_width="wrap_content"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:text="All Stores"-->
-             <!--android:layout_below="@id/floating_search_view_shop"-->
-             <!--android:textColor="#ffffff"-->
-             <!--android:textSize="24sp"-->
-             <!--android:layout_marginTop="20sp"-->
-             <!--android:layout_centerHorizontal="true"-->
-             <!--android:typeface="sans" />-->
+         <TextView
+             android:id="@+id/title"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="All Stores"
+             android:layout_below="@id/floating_search_view_shop"
+             android:textColor="#ffffff"
+             android:textSize="22sp"
+             android:layout_marginTop="15sp"
+             android:fontFamily="@font/regular"
+             android:layout_centerHorizontal="true"
+             android:typeface="sans" />
 
 
       </RelativeLayout>
@@ -52,7 +53,7 @@
           android:layout_height="match_parent"
           android:layout_marginLeft="15sp"
           android:layout_marginRight="15sp"
-          android:layout_marginTop="100sp"
+          android:layout_marginTop="120sp"
           android:padding="10dp"
           android:background="@drawable/layout_background"
           android:orientation="vertical">

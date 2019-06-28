@@ -25,9 +25,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.techease.elocator.R;
+import com.techease.elocator.adapters.CustomSpinnerAdapter;
 import com.techease.elocator.utilities.BaseNetworking;
 import com.techease.elocator.utilities.FireBaseDataInsertion;
 import com.techease.elocator.utilities.GeneralUtils;
@@ -69,6 +72,8 @@ public class AddStoreFragment extends Fragment {
     ImageView ivStore;
     @BindView(R.id.iv_add_store)
     ImageView ivAddStore;
+    @BindView(R.id.spinner_category)
+    Spinner spCategory;
     @BindView(R.id.btn_register)
     Button btnAddStore;
 
@@ -82,7 +87,7 @@ public class AddStoreFragment extends Fragment {
     DatabaseReference databaseReference;
     StorageReference mStorageRef,riversRef;
 
-    String strLatitude="34.016473", strLongitude="71.525673",strTitle,strContact,strAddress;
+    String strLatitude="34.016473", strLongitude="71.525673",strTitle,strContact,strAddress,strCategory;
 
     public static double lattitude, longitude;
     LocationManager locationManager;
@@ -104,7 +109,22 @@ public class AddStoreFragment extends Fragment {
     }
 
     private void initViews() {
+        spCategory.setAdapter(new CustomSpinnerAdapter(getActivity(), R.layout.spinner_layout, getActivity().getResources().getStringArray(R.array.categories), "Select Category"));
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+        spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strCategory = spCategory.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         ivAddStore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,11 +137,11 @@ public class AddStoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(validate()){
-                    databaseReference = firebaseDatabase.getReference().child("AllStores");
+                    databaseReference = firebaseDatabase.getReference().child("Stores").child(strCategory);
                     FireBaseDataInsertion.StoreDataInsertion(getActivity(), databaseReference,strTitle,strContact,strAddress,strLatitude,strLongitude);
 
                     if(FireBaseDataInsertion.successfulBoolean){
-                        GeneralUtils.connectFragmentDrawerWithoutBaack(getActivity(),new StoreFragment());
+                        GeneralUtils.connectFragmentDrawerWithoutBaack(getActivity(),new HomeFragment());
                     }
                 }
             }
@@ -326,15 +346,16 @@ public class AddStoreFragment extends Fragment {
         strAddress = etAddress.getText().toString();
 
         if(strTitle.isEmpty() || strTitle == null){
-            etTitle.setText("Title is compulsory");
+            etTitle.setError("Title is compulsory");
             valid = false;
         }
         else {
             valid = true;
         }
 
+
         if(strContact.isEmpty() || strContact == null){
-            etContact.setText("please enter you contact number");
+            etContact.setError("please enter you contact number");
             valid = false;
         }
         else {
@@ -342,7 +363,15 @@ public class AddStoreFragment extends Fragment {
         }
 
         if(strAddress.isEmpty() || strAddress == null){
-            etAddress.setText("please enter your address");
+            etAddress.setError("please enter your address");
+            valid = false;
+        }
+        else {
+            valid = true;
+        }
+
+        if(strCategory.equals("Select Category") || strCategory.isEmpty() || strAddress == null){
+            Toast.makeText(getActivity(), "please choose your category", Toast.LENGTH_SHORT).show();
             valid = false;
         }
         else {

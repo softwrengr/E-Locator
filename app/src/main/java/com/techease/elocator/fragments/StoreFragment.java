@@ -42,6 +42,8 @@ import butterknife.ButterKnife;
 
 public class StoreFragment extends Fragment {
     View view;
+    @BindView(R.id.title)
+    TextView tvTitle;
     @BindView(R.id.floating_search_view_shop)
     FloatingSearchView mSearchViewShop;
     @BindView(R.id.rv_stores)
@@ -50,6 +52,9 @@ public class StoreFragment extends Fragment {
     DatabaseReference databaseReference;
     private FirebaseRecyclerAdapter adapter;
     GetLocation getLocation;
+
+    Bundle bundle;
+    String strCategory;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +69,17 @@ public class StoreFragment extends Fragment {
 
     private void initUI() {
         ButterKnife.bind(this, view);
+        bundle = this.getArguments();
+        if (bundle != null) {
+             strCategory = bundle.getString("category");
+             tvTitle.setText(strCategory);
+        }
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        showCustomerData(strCategory);
+
+
+
 
         mSearchViewShop.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
@@ -71,13 +87,10 @@ public class StoreFragment extends Fragment {
 
             }
         });
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        showCustomerData();
     }
 
-    private void showCustomerData() {
-        databaseReference = firebaseDatabase.getReference("AllStores");
+    private void showCustomerData(String category) {
+        databaseReference = firebaseDatabase.getReference("Stores").child(category);
 
         rvStores.setHasFixedSize(true);
         rvStores.setLayoutManager(new LinearLayoutManager(getActivity()));

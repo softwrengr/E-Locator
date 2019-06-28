@@ -16,6 +16,7 @@ import android.view.Menu;
 
 import com.techease.elocator.R;
 import com.techease.elocator.fragments.AddStoreFragment;
+import com.techease.elocator.fragments.HomeFragment;
 import com.techease.elocator.fragments.StoreFragment;
 import com.techease.elocator.utilities.GeneralUtils;
 
@@ -29,7 +30,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
+        GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
