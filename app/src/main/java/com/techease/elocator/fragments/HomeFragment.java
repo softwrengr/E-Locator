@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
-        getActivity().setTitle("Register your store");
+        getActivity().setTitle(getResources().getString(R.string.app_name));
         initViews();
         return view;
     }

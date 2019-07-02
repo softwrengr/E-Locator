@@ -16,12 +16,12 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="200sp"
-          android:background="@color/colorPrimary">
+          android:background="@drawable/background">
 
          <com.arlib.floatingsearchview.FloatingSearchView
              android:id="@+id/floating_search_view_shop"
              android:layout_width="match_parent"
-             android:layout_height="60sp"
+             android:layout_height="70sp"
              app:floatingSearch_searchBarMarginLeft="20sp"
              app:floatingSearch_searchBarMarginTop="10sp"
              app:floatingSearch_searchBarMarginRight="20sp"
@@ -32,18 +32,6 @@
              app:floatingSearch_leftActionMode="showHamburger"
              app:floatingSearch_close_search_on_keyboard_dismiss="true"/>/>
 
-         <TextView
-             android:id="@+id/title"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="All Stores"
-             android:layout_below="@id/floating_search_view_shop"
-             android:textColor="#ffffff"
-             android:textSize="22sp"
-             android:layout_marginTop="15sp"
-             android:fontFamily="@font/regular"
-             android:layout_centerHorizontal="true"
-             android:typeface="sans" />
 
 
       </RelativeLayout>
@@ -53,7 +41,7 @@
           android:layout_height="match_parent"
           android:layout_marginLeft="15sp"
           android:layout_marginRight="15sp"
-          android:layout_marginTop="120sp"
+          android:layout_marginTop="100sp"
           android:padding="10dp"
           android:background="@drawable/layout_background"
           android:orientation="vertical">
@@ -62,9 +50,9 @@
              android:id="@+id/rv_stores"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="5sp"
-             android:layout_marginRight="5sp"
-             android:background="@color/white">
+             android:layout_marginLeft="10sp"
+             android:layout_marginRight="10sp"
+             android:background="@color/gray">
 
          </android.support.v7.widget.RecyclerView>
 

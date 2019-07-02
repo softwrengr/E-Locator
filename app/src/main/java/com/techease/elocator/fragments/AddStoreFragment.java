@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.techease.elocator.R;
 import com.techease.elocator.adapters.CustomSpinnerAdapter;
+import com.techease.elocator.utilities.AlertUtils.AlertUtilities;
 import com.techease.elocator.utilities.ShareUtils;
 import com.techease.elocator.utilities.FireBaseDataInsertion;
 import com.techease.elocator.utilities.GeneralUtils;
@@ -54,6 +55,7 @@ import static android.content.Context.LOCATION_SERVICE;
 
 
 public class AddStoreFragment extends Fragment {
+    AlertDialog alertDialog;
     View view;
     @BindView(R.id.et_title)
     EditText etTitle;
@@ -80,7 +82,7 @@ public class AddStoreFragment extends Fragment {
     DatabaseReference databaseReference;
     StorageReference mStorageRef,riversRef;
 
-    String strLatitude="34.016473", strLongitude="71.525673",strTitle,strContact,strAddress,strCategory;
+    String strLatitude="34.016473", strLongitude="71.525673",strTitle,strContact,strAddress,strCategory="Others";
 
     public static double lattitude, longitude;
     LocationManager locationManager;
@@ -93,7 +95,7 @@ public class AddStoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_store, container, false);
-        getActivity().setTitle(getResources().getString(R.string.app_name));
+        getActivity().setTitle("Register your store");
         ButterKnife.bind(this, view);
         ShareUtils.grantPermission(getActivity());
         checkLocation();
@@ -102,7 +104,7 @@ public class AddStoreFragment extends Fragment {
     }
 
     private void initViews() {
-        spCategory.setAdapter(new CustomSpinnerAdapter(getActivity(), R.layout.spinner_layout, getActivity().getResources().getStringArray(R.array.categories), "Select Category"));
+        spCategory.setAdapter(new CustomSpinnerAdapter(getActivity(), R.layout.spinner_layout, getActivity().getResources().getStringArray(R.array.categories), "Choose Category"));
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
@@ -129,11 +131,14 @@ public class AddStoreFragment extends Fragment {
         btnAddStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alertDialog = AlertUtilities.createProgressDialog(getActivity());
+                alertDialog.show();
                 if(validate()){
                     databaseReference = firebaseDatabase.getReference().child("Stores").child(strCategory);
                     FireBaseDataInsertion.StoreDataInsertion(getActivity(), databaseReference,strTitle,strContact,strAddress,strLatitude,strLongitude);
 
                     if(FireBaseDataInsertion.successfulBoolean){
+                        alertDialog.dismiss();
                         GeneralUtils.connectFragmentDrawerWithoutBaack(getActivity(),new HomeFragment());
                     }
                 }
@@ -363,12 +368,17 @@ public class AddStoreFragment extends Fragment {
             valid = true;
         }
 
-        if(strCategory.equals("Select Category") || strCategory.isEmpty() || strAddress == null){
+        if(strCategory.equals("Choose Category") || strCategory.isEmpty() || strAddress == null){
             Toast.makeText(getActivity(), "please choose your category", Toast.LENGTH_SHORT).show();
             valid = false;
         }
         else {
             valid = true;
+        }
+
+        if(sourceFile == null){
+            Toast.makeText(getActivity(), "please upload poster image", Toast.LENGTH_SHORT).show();
+            valid = false;
         }
 
 

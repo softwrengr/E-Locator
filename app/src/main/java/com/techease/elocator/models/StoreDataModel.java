@@ -13,14 +13,14 @@ public class StoreDataModel {
     public String longitude;
     public String title;
 
-    public StoreDataModel(String address, String contact, String image, String latitude, String longitude, String title) {
-        this.address = address;
-        this.contact = contact;
-        this.image = image;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.title = title;
-    }
+//    public StoreDataModel(String address, String contact, String image, String latitude, String longitude, String title) {
+//        this.address = address;
+//        this.contact = contact;
+//        this.image = image;
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.title = title;
+//    }
 
     public String getAddress() {
         return address;

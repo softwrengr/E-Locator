@@ -16,6 +16,7 @@
     <string name="menu_rate">Rate App</string>
 
     <string-array name="categories">
+        <item>Choose Category</item>
         <item>Hospital</item>
         <item>Resturants</item>
         <item>Shops</item>
