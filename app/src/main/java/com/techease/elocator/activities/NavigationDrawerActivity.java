@@ -1,5 +1,8 @@
 package com.techease.elocator.activities;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +22,7 @@ import com.techease.elocator.fragments.AddStoreFragment;
 import com.techease.elocator.fragments.HomeFragment;
 import com.techease.elocator.fragments.StoreFragment;
 import com.techease.elocator.utilities.GeneralUtils;
+import com.techease.elocator.utilities.ShareUtils;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,24 +84,31 @@ public class NavigationDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
+            GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
         } else if (id == R.id.nav_store) {
+            this.setTitle("All ");
             GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
-
-        } else if (id == R.id.nav_view) {
-
-        } else if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_share) {
-
+            startActivity(ShareUtils.shareApp());
         } else if (id == R.id.nav_rate) {
-
+            loadGooglePlay();
         } else if (id == R.id.nav_add) {
+            this.setTitle("Register your store");
             GeneralUtils.connectFragmentWithDrawer(this, new AddStoreFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadGooglePlay() {
+        try {
+            startActivity(ShareUtils.loadApp(this));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+        }
     }
 }

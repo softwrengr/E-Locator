@@ -1,22 +1,19 @@
 package com.techease.elocator.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
@@ -26,21 +23,18 @@ import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.techease.elocator.R;
 import com.techease.elocator.models.StoreDataModel;
-import com.techease.elocator.utilities.BaseNetworking;
+import com.techease.elocator.utilities.AlertUtils.AlertUtilities;
 import com.techease.elocator.utilities.GeneralUtils;
 import com.techease.elocator.utilities.GetLocation;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class StoreFragment extends Fragment {
+    AlertDialog alertDialog;
     View view;
     @BindView(R.id.title)
     TextView tvTitle;
@@ -76,6 +70,8 @@ public class StoreFragment extends Fragment {
         }
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        alertDialog = AlertUtilities.createProgressDialog(getActivity());
+        alertDialog.show();
         showCustomerData(strCategory);
 
 
@@ -90,7 +86,7 @@ public class StoreFragment extends Fragment {
     }
 
     private void showCustomerData(String category) {
-        databaseReference = firebaseDatabase.getReference("Stores").child(category);
+         databaseReference = firebaseDatabase.getReference("Stores").child(category);
 
         rvStores.setHasFixedSize(true);
         rvStores.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -101,6 +97,7 @@ public class StoreFragment extends Fragment {
                             @NonNull
                             @Override
                             public StoreDataModel parseSnapshot(@NonNull DataSnapshot snapshot) {
+                                alertDialog.dismiss();
                                 return new StoreDataModel(
                                         snapshot.child("address").getValue().toString(),
                                         snapshot.child("contact").getValue().toString(),
@@ -108,7 +105,6 @@ public class StoreFragment extends Fragment {
                                         snapshot.child("latitude").getValue().toString(),
                                         snapshot.child("longitude").getValue().toString(),
                                         snapshot.child("title").getValue().toString());
-
                             }
                         })
                         .build();
@@ -118,7 +114,6 @@ public class StoreFragment extends Fragment {
         adapter = new FirebaseRecyclerAdapter<StoreDataModel, StoreFragment.UsersViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull StoreFragment.UsersViewHolder holder, int position, @NonNull final StoreDataModel model) {
-
                 holder.setName(getActivity(),model.getTitle(), model.getAddress(), model.getContact(), model.getImage(), model.getLatitude(), model.getLongitude());
 
             }

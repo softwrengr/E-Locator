@@ -2,7 +2,6 @@ package com.techease.elocator.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -32,17 +30,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.techease.elocator.R;
 import com.techease.elocator.adapters.CustomSpinnerAdapter;
-import com.techease.elocator.utilities.BaseNetworking;
+import com.techease.elocator.utilities.ShareUtils;
 import com.techease.elocator.utilities.FireBaseDataInsertion;
 import com.techease.elocator.utilities.GeneralUtils;
 
@@ -102,7 +95,7 @@ public class AddStoreFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_store, container, false);
         getActivity().setTitle(getResources().getString(R.string.app_name));
         ButterKnife.bind(this, view);
-        BaseNetworking.grantPermission(getActivity());
+        ShareUtils.grantPermission(getActivity());
         checkLocation();
         initViews();
         return view;

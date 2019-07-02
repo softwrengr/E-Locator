@@ -13,20 +13,20 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180sp"
-            android:background="@color/colorPrimary">
+            android:layout_height="200dp"
+            android:background="@drawable/background">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Register your store"
-                android:textColor="#ffffff"
-                android:fontFamily="@font/regular"
-                android:textSize="22sp"
-                android:layout_marginTop="30sp"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:typeface="sans" />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Register your store"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:fontFamily="@font/regular"-->
+                <!--android:textSize="22sp"-->
+                <!--android:layout_marginTop="30sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:typeface="sans" />-->
 
 
         </RelativeLayout>
