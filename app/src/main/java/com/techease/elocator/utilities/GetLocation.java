@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 import com.techease.elocator.activities.MainActivity;
+import com.techease.elocator.activities.NavigationDrawerActivity;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -34,7 +35,7 @@ public class GetLocation {
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions((MainActivity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+            ActivityCompat.requestPermissions((NavigationDrawerActivity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         } else {
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
