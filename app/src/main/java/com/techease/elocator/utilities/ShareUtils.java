@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.core.Context;
@@ -55,11 +56,13 @@ public class ShareUtils {
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
     }
 
-    public static void showImage(Activity context,String url){
+    public static void showImage(Activity context,String url,String name){
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_layout);
         ImageView imageView = dialog.findViewById(R.id.iv_show);
+        TextView tvName = dialog.findViewById(R.id.tv_name);
         Glide.with(context).load(url).into(imageView);
+        tvName.setText(name);
         dialog.show();
     }
 

@@ -72,7 +72,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.MyViewHolder
         viewHolder.ivPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtils.showImage((Activity) context,model.getImage());
+                ShareUtils.showImage((Activity) context,model.getImage(),model.getTitle());
             }
         });
 

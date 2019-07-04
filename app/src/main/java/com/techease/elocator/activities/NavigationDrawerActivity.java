@@ -86,7 +86,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
         } else if (id == R.id.nav_store) {
-            GeneralUtils.connectFragmentWithDrawer(this, new StoreFragment());
+            GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
 
         } else if (id == R.id.nav_share) {
             startActivity(ShareUtils.shareApp());

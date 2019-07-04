@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp"
         android:layout_weight="1"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="5dp">
 
     <RelativeLayout
         android:id="@+id/movies_layout"
