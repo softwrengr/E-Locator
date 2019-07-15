@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.techease.elocator.R;
+import com.techease.elocator.fragments.LoginFragment;
+import com.techease.elocator.utilities.GeneralUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.setTitle(getResources().getString(R.string.app_name));
 
-        startActivity(new Intent(MainActivity.this,NavigationDrawerActivity.class));
+        GeneralUtils.connectFragment(MainActivity.this,new LoginFragment());
     }
 }

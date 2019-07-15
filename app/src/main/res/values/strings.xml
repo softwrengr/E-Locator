@@ -15,6 +15,16 @@
     <string name="menu_share">Share</string>
     <string name="menu_rate">Rate App</string>
 
+    <string name="singup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="already">Already Registered?</string>
+    <string name="not_register">Not Registered Yet?</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login_account">Login Account</string>
+    <string name="register">Register Now</string>
+    <string name="name">Name</string>
+
     <string-array name="categories">
         <item>Choose Category</item>
         <item>Hospital</item>
@@ -22,4 +32,7 @@
         <item>Shops</item>
         <item>Others</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
