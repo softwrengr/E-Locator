@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.techease.elocator.R;
 import com.techease.elocator.utilities.GeneralUtils;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this,view);
         getActivity().setTitle(getResources().getString(R.string.app_name));
         initViews();
+        String name = GeneralUtils.getSharedPreferences(getActivity()).getString("name","");
+
         return view;
     }
 

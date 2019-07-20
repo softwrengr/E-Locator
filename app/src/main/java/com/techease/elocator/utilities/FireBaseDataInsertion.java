@@ -6,12 +6,17 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.techease.elocator.fragments.LoginFragment;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -19,9 +24,10 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class FireBaseDataInsertion {
-
+    public static boolean checkProfile;
     public static boolean successfulBoolean = false;
     public static String strFirebaseImageUrl;
+    FirebaseAuth auth;
 
     public static void StoreDataInsertion(Context context, DatabaseReference databaseReference, String strTitle, String strContact, String strAddress, String strLatitude, String strLongitude) {
 
@@ -58,6 +64,7 @@ public class FireBaseDataInsertion {
                             });
                             successfulBoolean = true;
                             Toast.makeText(context, "successful", Toast.LENGTH_SHORT).show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -74,4 +81,17 @@ public class FireBaseDataInsertion {
 
         return false;
     }
+
+
+    public static void userSignup(DatabaseReference databaseReference,String path, String name, String email, String password) {
+
+        HashMap userSignup = new HashMap<String, String>();
+        userSignup.put("image", path);
+        userSignup.put("name", name);
+        userSignup.put("email", email);
+        userSignup.put("password", password);
+
+        databaseReference.setValue(userSignup);
+    }
+
 }

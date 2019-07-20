@@ -102,6 +102,9 @@ public class LoginFragment extends Fragment {
         strPassword = etPassword.getText().toString().trim();
 
 
+        GeneralUtils.putStringValueInEditor(getActivity(),"email",strEmail);
+
+
         if (strEmail.isEmpty()) {
             etEmail.setError("enter a valid email address");
             valid = false;

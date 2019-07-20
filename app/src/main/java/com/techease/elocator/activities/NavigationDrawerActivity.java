@@ -16,17 +16,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.techease.elocator.R;
 import com.techease.elocator.fragments.AddStoreFragment;
 import com.techease.elocator.fragments.HomeFragment;
+import com.techease.elocator.fragments.ProfileFragment;
 import com.techease.elocator.fragments.StoreFragment;
 import com.techease.elocator.utilities.GeneralUtils;
 import com.techease.elocator.utilities.ShareUtils;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    TextView navUsername;
+    String email;
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +40,22 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        navUsername = (TextView) headerView.findViewById(R.id.name);
+        navUsername.setText(GeneralUtils.getSharedPreferences(this).getString("name",""));
+
+        navUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.closeDrawer(GravityCompat.START);
+                GeneralUtils.connectFragmentWithDrawer(NavigationDrawerActivity.this,new ProfileFragment());
+            }
+        });
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);

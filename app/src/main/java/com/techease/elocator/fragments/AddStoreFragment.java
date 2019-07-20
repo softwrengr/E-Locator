@@ -80,7 +80,6 @@ public class AddStoreFragment extends Fragment {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    StorageReference mStorageRef,riversRef;
 
     String strLatitude="34.016473", strLongitude="71.525673",strTitle,strContact,strAddress,strCategory="Others";
 
