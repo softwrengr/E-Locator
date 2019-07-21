@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.techease.elocator.R;
 import com.techease.elocator.activities.MainActivity;
 import com.techease.elocator.activities.NavigationDrawerActivity;
 import com.techease.elocator.utilities.AlertUtils.AlertUtilities;
+import com.techease.elocator.utilities.AlertUtils.FirebaseUtils;
 import com.techease.elocator.utilities.GeneralUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 
 public class LoginFragment extends Fragment {
@@ -46,6 +54,8 @@ public class LoginFragment extends Fragment {
     boolean valid = false;
 
     private FirebaseAuth auth;
+    public static DatabaseReference databaseReference;
+    public static FirebaseDatabase firebaseDatabase;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,8 +99,9 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "your email or password is incorrect", Toast.LENGTH_SHORT).show();
                 } else {
                     alertDialog.dismiss();
-                    GeneralUtils.putBooleanValueInEditor(getActivity(), "loggedIn", true).commit();
-                    startActivity(new Intent(getActivity(), NavigationDrawerActivity.class));
+                    String[] splitStr = strEmail.split("@");
+                    String child = splitStr[0];
+                    showProfileInfo(child);
                 }
             }
         });
@@ -120,5 +131,37 @@ public class LoginFragment extends Fragment {
             etPassword.setError(null);
         }
         return valid;
+    }
+
+    public void showProfileInfo(String child) {
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        databaseReference = firebaseDatabase.getReference("Profile").child(child);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (!dataSnapshot.exists()) {
+                    Log.d("data","no data available");
+                } else {
+                    String strImage = dataSnapshot.child("image").getValue().toString();
+                    String strName = dataSnapshot.child("name").getValue().toString();
+
+                    GeneralUtils.putBooleanValueInEditor(getActivity(), "loggedIn", true).commit();
+                    GeneralUtils.putStringValueInEditor(getActivity(),"image",strImage);
+                    GeneralUtils.putStringValueInEditor(getActivity(),"username",strName);
+
+                    startActivity(new Intent(getActivity(), NavigationDrawerActivity.class));
+
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        databaseReference.addListenerForSingleValueEvent(eventListener);
     }
 }

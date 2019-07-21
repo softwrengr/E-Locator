@@ -77,7 +77,7 @@ public class SignUpFragment extends Fragment {
     String strName, strEmail, strPassword, strProfileImagePath;
     FirebaseAuth auth;
 
-    private Uri imageURI;
+    private Uri imageURI=null;
     File sourceFile;
     final int CAMERA_CAPTURE = 10;
     final int RESULT_LOAD_IMAGE = 20;
@@ -173,19 +173,24 @@ public class SignUpFragment extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && null != data) {
-            Uri selectedImageUri = data.getData();
-            imageURI = selectedImageUri;
-            String imagepath = getPath(selectedImageUri);
+            imageURI = data.getData();
+            String imagepath = getPath(imageURI);
             sourceFile = new File(imagepath);
+            try {
+                sourceFile = new Compressor(getActivity()).compressToFile(sourceFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else if (resultCode == RESULT_OK && requestCode == CAMERA_CAPTURE && data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            imageURI = data.getData();
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
             thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
             sourceFile = new File(Environment.getExternalStorageDirectory(),
                     System.currentTimeMillis() + ".png");
+            imageURI = Uri.fromFile(sourceFile);
+
             FileOutputStream fo;
             try {
                 sourceFile.createNewFile();
@@ -245,8 +250,6 @@ public class SignUpFragment extends Fragment {
                                 }
                             });
                             checkProfile = true;
-                            Toast.makeText(context, "successful", Toast.LENGTH_SHORT).show();
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -267,19 +270,14 @@ public class SignUpFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "user successfully added", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
+                    Toast.makeText(getActivity(), "user successfully added", Toast.LENGTH_SHORT).show();
                     GeneralUtils.connectFragment(getActivity(), new LoginFragment());
                 } else {
                     Toast.makeText(getActivity(), "try with another email", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
-
-
-        startActivity(new Intent(getActivity(), NavigationDrawerActivity.class));
     }
 
     private boolean validate() {
@@ -288,8 +286,6 @@ public class SignUpFragment extends Fragment {
         strName = etName.getText().toString();
         strEmail = etEmail.getText().toString().trim();
         strPassword = etPassword.getText().toString();
-
-        GeneralUtils.putStringValueInEditor(getActivity(),"name",strName);
 
         if (strName.isEmpty()) {
             etName.setError("enter your full name");

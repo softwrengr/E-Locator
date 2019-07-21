@@ -16,20 +16,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.techease.elocator.R;
 import com.techease.elocator.fragments.AddStoreFragment;
 import com.techease.elocator.fragments.HomeFragment;
 import com.techease.elocator.fragments.ProfileFragment;
 import com.techease.elocator.fragments.StoreFragment;
+import com.techease.elocator.utilities.AlertUtils.FirebaseUtils;
+import com.techease.elocator.utilities.FireBaseDataInsertion;
 import com.techease.elocator.utilities.GeneralUtils;
 import com.techease.elocator.utilities.ShareUtils;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    ImageView ivProfile;
     TextView navUsername;
-    String email;
+    String username,image;
     DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
+        username = GeneralUtils.getSharedPreferences(this).getString("username","");
+        image = GeneralUtils.getSharedPreferences(this).getString("image","");
+
 
 
         drawer = findViewById(R.id.drawer_layout);
@@ -46,7 +54,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
 
         navUsername = (TextView) headerView.findViewById(R.id.name);
-        navUsername.setText(GeneralUtils.getSharedPreferences(this).getString("name",""));
+        ivProfile = headerView.findViewById(R.id.imageView);
+
+        Glide.with(this).load(image).into(ivProfile);
+        navUsername.setText(username);
 
         navUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +82,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
     }
 
     @Override
@@ -128,4 +140,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
         }
     }
+
+
+
+
 }

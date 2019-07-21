@@ -208,12 +208,12 @@ public class AddStoreFragment extends Fragment {
 
         } else if (resultCode == RESULT_OK && requestCode == CAMERA_CAPTURE && data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            imageURI = data.getData();
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
             thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
             sourceFile = new File(Environment.getExternalStorageDirectory(),
                     System.currentTimeMillis() + ".png");
+            imageURI = Uri.fromFile(sourceFile);
             FileOutputStream fo;
             try {
                 sourceFile.createNewFile();

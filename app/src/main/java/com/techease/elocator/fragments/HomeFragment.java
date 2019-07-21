@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,8 @@ public class HomeFragment extends Fragment {
         view =  inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
         getActivity().setTitle(getResources().getString(R.string.app_name));
+        onback(view);
         initViews();
-        String name = GeneralUtils.getSharedPreferences(getActivity()).getString("name","");
 
         return view;
     }
@@ -75,5 +76,23 @@ public class HomeFragment extends Fragment {
                 GeneralUtils.connectFragmentWithDrawer(getActivity(),new StoreFragment()).setArguments(bundle);
             }
         });
+    }
+
+    private void onback(View view) {
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    getActivity().finishAffinity();
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 }
