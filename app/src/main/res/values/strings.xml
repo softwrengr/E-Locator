@@ -25,6 +25,9 @@
     <string name="register">Register Now</string>
     <string name="name">Name</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="categories">
         <item>Choose Category</item>
         <item>Hospital</item>
@@ -32,7 +35,4 @@
         <item>Shops</item>
         <item>Others</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

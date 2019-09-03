@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.techease.elocator.R;
 import com.techease.elocator.fragments.AddStoreFragment;
 import com.techease.elocator.fragments.HomeFragment;
+import com.techease.elocator.fragments.NewsFragment;
 import com.techease.elocator.fragments.ProfileFragment;
 import com.techease.elocator.fragments.StoreFragment;
 import com.techease.elocator.utilities.AlertUtils.FirebaseUtils;
@@ -117,7 +118,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
             GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
         } else if (id == R.id.nav_store) {
             GeneralUtils.connectFragmentWithDrawer(this, new HomeFragment());
-
         } else if (id == R.id.nav_share) {
             startActivity(ShareUtils.shareApp());
         } else if (id == R.id.nav_rate) {
@@ -125,6 +125,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_add) {
             this.setTitle("Register your store");
             GeneralUtils.connectFragmentWithDrawer(this, new AddStoreFragment());
+        }
+        else if (id == R.id.nav_news) {
+            GeneralUtils.connectFragmentWithDrawer(this, new NewsFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

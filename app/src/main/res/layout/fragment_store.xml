@@ -10,7 +10,8 @@
 
    <FrameLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="match_parent"
+       android:background="@color/white">
 
 
       <RelativeLayout
@@ -29,7 +30,7 @@
              app:floatingSearch_suggestionsListAnimDuration="250"
              app:floatingSearch_showSearchKey="false"
              app:floatingSearch_dimBackground="false"
-             app:floatingSearch_leftActionMode="showHamburger"
+             app:floatingSearch_leftActionMode="showSearch"
              app:floatingSearch_close_search_on_keyboard_dismiss="true"/>/>
 
 
@@ -39,8 +40,8 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_marginLeft="15sp"
-          android:layout_marginRight="15sp"
+          android:layout_marginLeft="12sp"
+          android:layout_marginRight="12sp"
           android:layout_marginTop="100sp"
           android:padding="10dp"
           android:background="@drawable/layout_background"
@@ -50,8 +51,6 @@
              android:id="@+id/rv_stores"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="10sp"
-             android:layout_marginRight="10sp"
              android:background="@color/gray">
 
          </android.support.v7.widget.RecyclerView>
