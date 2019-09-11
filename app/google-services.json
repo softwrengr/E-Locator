@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1058781421654:android:01b2d9ca493b104b",
+        "mobilesdk_app_id": "1:1058781421654:android:4db1caf71fc98010",
         "android_client_info": {
-          "package_name": "com.techease.elocator"
+          "package_name": "com.abdurehman.elocator"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1058781421654-nejjn0i41a87uohrknc2g8g8j89j27k1.apps.googleusercontent.com",
+          "client_id": "1058781421654-vqrkoaulmprvfuv22p5lghj0qdoiranc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.techease.elocator",
+            "package_name": "com.abdurehman.elocator",
             "certificate_hash": "8a49158720a2ebae8039b7b3d30cebe77f89f196"
           }
         },

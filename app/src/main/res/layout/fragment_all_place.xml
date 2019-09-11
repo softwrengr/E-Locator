@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.AllPlaceFragment">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:background="@drawable/background">
+
+            <com.arlib.floatingsearchview.FloatingSearchView
+                android:id="@+id/floating_search_view_shop"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                app:floatingSearch_searchBarMarginLeft="20sp"
+                app:floatingSearch_searchBarMarginTop="10sp"
+                app:floatingSearch_searchBarMarginRight="20sp"
+                app:floatingSearch_searchHint="Search"
+                app:floatingSearch_suggestionsListAnimDuration="250"
+                app:floatingSearch_showSearchKey="false"
+                app:floatingSearch_dimBackground="false"
+                app:floatingSearch_leftActionMode="showSearch"
+                app:floatingSearch_close_search_on_keyboard_dismiss="true"/>/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginTop="100sp"
+            android:padding="10dp"
+            android:background="@drawable/layout_background"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_all_places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>
